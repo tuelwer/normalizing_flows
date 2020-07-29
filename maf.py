@@ -9,6 +9,7 @@ import torch.nn.functional as F
 import torch.distributions as D
 import torchvision.transforms as T
 from torchvision.utils import save_image
+import pickel
 
 import matplotlib
 matplotlib.use('Agg')
@@ -679,6 +680,8 @@ if __name__ == '__main__':
     if not os.path.isdir(args.output_dir):
         os.makedirs(args.output_dir)
 
+    pickle.dump(r, open(args.output_dir+'/args.pickle', mode='wb'))
+    
     # setup device
     args.device = torch.device('cuda:0' if torch.cuda.is_available() and not args.no_cuda else 'cpu')
     torch.manual_seed(args.seed)
